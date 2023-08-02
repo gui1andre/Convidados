@@ -10,7 +10,7 @@ import br.com.convidados.constants.DataBaseConstants
 import br.com.convidados.databinding.ActivityGuestFormBinding
 import br.com.convidados.model.GuestModel
 import br.com.convidados.viewmodel.GuestFormViewModel
-import com.google.android.material.snackbar.Snackbar
+
 
 class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityGuestFormBinding
@@ -58,7 +58,13 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         if (v.id == R.id.button_save) {
             val name = binding.editName.text.toString()
             val presence = binding.radioPresent.isChecked
-            viewModel.save(GuestModel(guestId, name, presence))
+            val guest = GuestModel().apply {
+                this.id = 0
+                this.name = name
+                this.presence = presence
+
+            }
+            viewModel.save(guest)
         }
     }
 }
